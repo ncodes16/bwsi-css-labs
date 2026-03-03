@@ -8,6 +8,19 @@ The script asks the user to input the numbers and the operation to be performed,
 and prints the result to the terminal window.
 
 """
+def sanitize_input_request(input_val: str, operation: bool) -> float | str:
+    """Function to request a number/operation input: if the input is not a number/operation it will keep asking until it gets one"""
+    if not operation:
+        try:
+            input_f = float(input_val)
+            return input_f
+        except ValueError:
+            return sanitize_input_request(input("That's not a number! Try again: "), False)
+    else:
+        if input_val.strip().lower() in ['add', 'subtract', 'multiply', 'divide']:
+            return input_val.strip().lower()
+        else:
+            return sanitize_input_request(input("That's not a valid operation! Try again: "), True)
 
 def simple_calculator(operation: str, num1: float, num2: float) -> float:
     """
@@ -42,9 +55,9 @@ def main():
     print(f"===== Simple Calculator =====")
 
     # Ask the user for sample input    
-    num1 = float(input("Enter the first number: "))
-    num2 = float(input("Enter the second number: "))
-    operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
+    num1 = sanitize_input_request(input("Enter the first number: "), False)
+    num2 = sanitize_input_request(input("Enter the second number: "), False)
+    operation = sanitize_input_request(input("Enter the operation: "), True)
 
     # Perform the calculation and display the result
     result = simple_calculator(operation, num1, num2)
