@@ -30,7 +30,8 @@ def test_division():
 def test_division_by_zero():
     with pytest.raises(ValueError, match="Cannot divide by zero."):
         simple_calculator("divide", 5, 0)               # Test division by zero
-
+def test_float_arithmetic():
+    assert simple_calculator("multiply", 6.5, 12.5) == 81.25
 def test_invalid_operation():
     with pytest.raises(ValueError, match="Invalid operation. Please choose from 'add', 'subtract', 'multiply', or 'divide'."):
         simple_calculator("modulus", 5, 3)              # Test for invalid operation
