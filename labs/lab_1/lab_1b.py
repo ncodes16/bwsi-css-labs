@@ -8,7 +8,9 @@ The script asks the user to input the numbers and the operation to be performed,
 and prints the result to the terminal window.
 
 """
-def sanitize_input_request(input_val: str, operation: bool) -> float | str:
+from typing import Union
+
+def sanitize_input_request(input_val: str, operation: bool) -> Union[float, str]:
     """Function to request a number/operation input: if the input is not a number/operation it will keep asking until it gets one"""
     if not operation:
         try:
